@@ -9,6 +9,14 @@ function BinarioADecimal(num) {
   //    1 * 2 ** 3  =  8
   //    1 * 2 ** 4  =  16
   //    0 * 2 ** 5  =   0
+  let arrInv = num.toString().split("").reverse();
+  let resultado = 0;
+  for (let i = 0; i < arrInv.length; i++) {
+    if (arrInv[i] == 1) {
+      resultado += 2 ** i;
+    }
+  }
+  return resultado;
 }
 
 function DecimalABinario(num) {
@@ -23,6 +31,17 @@ function DecimalABinario(num) {
   // 5 / 2 = 2 residuo 1
   // 2 / 2 = 1 residuo 0
   // 1 / 2 = 0 residuo 1
+  let arrVac = [];
+  while (num > 0) {
+    if (num % 2 === 1) {
+      arrVac.unshift(1);
+    } else {
+      arrVac.unshift(0);
+    }
+    num = Math.floor(num / 2);
+  }
+  let cadena = arrVac.join("");
+  return cadena;
 }
 
 module.exports = {

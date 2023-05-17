@@ -117,9 +117,22 @@ parseInt("09") // este codigo devuelve 9 ya que la funcion parseInt esta pasando
 ¿Cuál es el output o salida en consola luego de ejecutar este código? Explicar por qué:
 
 ```javascript
+// crea contexto global
+// crea lexical enviroment
+// f test()
+//crea ejecution enviroment
+// function test () ------------ crea contexto local test()
+//                               // lexical enviroment
+//                               // var a = undefined;
+//                               // f foo()
+//                               // ejecution enviroment
+//                               // console.log (a) undefined;
+//                               // console.log foo() 2;
+//                               //
+
 function test() {
-  console.log(a);
-  console.log(foo());
+  console.log(a); //undefined
+  console.log(foo()); //2
 
   var a = 1;
   function foo() {
@@ -133,6 +146,18 @@ test();
 Y el de este código? :
 
 ```javascript
+//crea contexto global
+//lexical enviroment ------
+// var snack = undefined
+// f getFood(food)
+//ejecution context -----
+// snack = meow mix
+// function getFood(false) --------------------- crea entorno local
+//                                              //lexical enviroment
+//                                              // if()
+//                                              // ejecution enviroment
+//                                              // if(false) == no hace nada ya que lo ignora a dar false
+//                                              // return meow mix ya que si no encuentra una variable en local va a buscarla al global
 var snack = "Meow Mix";
 
 function getFood(food) {
@@ -151,6 +176,21 @@ getFood(false);
 ¿Cuál es el output o salida en consola luego de ejecutar esté código? Explicar por qué:
 
 ```javascript
+// creo global
+// creo lexical enviroment
+// var fullname = undefined
+// var obj = undefined
+// var test = undefined
+// creo ejecution enviroment
+// fullname = juan perez;
+// obj = {}
+// console.log() ----------- entorno local
+//                          // lexical enviroment
+//                          // fullname: natalia nerea
+//                          // prop {} ---------------------- entorno local
+//                         //                                // lexical enviroment
+//                        //                                // fullname : aurelio rosa
+//                        //                               // get full name : undefined
 var fullname = "Juan Perez";
 var obj = {
   fullname: "Natalia Nerea",
@@ -162,16 +202,34 @@ var obj = {
   },
 };
 
-console.log(obj.prop.getFullname());
+console.log(obj.prop.getFullname()); // aurelio rosa
 
 var test = obj.prop.getFullname;
 
-console.log(test());
+console.log(test()); // function o undefined undefined enralisada
 ```
 
 ### Event loop
 
 Considerando el siguiente código, ¿Cuál sería el orden en el que se muestra por consola? ¿Por qué?
+
+el event loop es una mecanismo que tiene javascript para no cortar el funcionamiento del codigo. lo que hace es mandar los eventos que necesitan de un tiempo para ejecutarse a una pila de ejecucion donde se van a resolver despues de terminar todo su recorrido normal
+
+// objeto global
+// lexical enviroment
+// f printing()
+// ejecution enviroment
+// printing() --------------------entorno local
+// // lexical sin
+// // ejecution enviroment
+// // se resuelve log 1
+// // setTime out ----------------------------------abre pila de ejecucioion que se resolvera despues
+// // setTimeout1000 log 2
+// // setTimeout0 log 3
+// // se resuelve log 4
+// // <--------------------------------- se empieza a resolver la pila
+// // log 3
+// // log 2
 
 ```javascript
 function printing() {
@@ -185,7 +243,7 @@ function printing() {
   console.log(4);
 }
 
-printing();
+printing(); // = 1,4,3,2
 ```
 
 </br >

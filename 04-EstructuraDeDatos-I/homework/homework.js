@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 /*
 Definir las funciones recursivas nFactorial y nFibonacci.
@@ -14,9 +14,37 @@ Secuencia:  0, 1, 1, 2, 3, 5, 8, 13, 21, 34, ...
 Como ejercicio adicional y completamente opcional, al terminar de resolver este problema pueden intentar definir funciones que logren los mismos resultados pero de manera iterativa.
 */
 
-function nFactorial(n) {}
+// n es un numero natural
+// su factorial se representa como n!
+// n! es * de todos los numeros menores a el Ejemplo: 5! = 5 * 4 * 3 * 2 * 1
+// tienen que ser >= 1
+// tengo que hacer una funcion recursiva - basicamente funcion que se retorne a si misma. teniendo en cuenta que debo pasarle una condicion de corte
+function nFactorial(n) {
+  // condicion de corte
+  if (n >= 1) {
+    return 1;
+  }
+  // hacer de esta funcion una funcion recursiva. Es decir que se pase a si misma para generar el loop
+  return n * nFactorial(n - 1);
+}
 
-function nFibonacci(n) {}
+// n es el numero de secuencias a repetir
+// 0 y 1 es =  n-1  n+1     0+1=1     1+1=2    1+2=3    2+3=5   c+b=c
+// 1, 1 es = 
+//Esto es lo que debo lograr Secuencia:  0, 1, 1, 2, 3, 5, 8, 13, 21, 34
+// Ejemplo: nFibonacci(7) retornará 13, ya que 13
+function nFibonacci(n) {
+  //caso de corte
+  if (n === 0) {
+    console.log("termino");
+    return 0;
+  } else if (n === 1) {
+    console.log("termino2");
+    return 1;
+  }
+  //pasarse a si misma, la clave esta en identificar en que pingo consta el caso base
+  return (n = nFibonacci(n - 1) + nFibonacci(n - 2));
+}
 
 /*
 Implementar la clase Queue, sabiendo que es una estructura de tipo FIFO, donde el primer elemento que ingresa es el primero que se quita. Definir los siguientes métodos:
@@ -27,11 +55,19 @@ Implementar la clase Queue, sabiendo que es una estructura de tipo FIFO, donde e
 Pueden utilizar class o función constructora.
 */
 
-function Queue() {}
+
+// tengo que hacer que esta function sea una kiwi
+function Queue() {
+  let arr = [];
+}
+// metodos para kiwi, tengo que entender que es una estructura fifo (el primero en entrar es el primero en salir)
+// representado .enkiwi(person4)  => [persona3,persona2,persona1] = [persona4,persona3,persona2,persona1]
+// representado .deskiwi() => [persona4,persona3,persona2]        out[persona1]
+Queue.prototype.unshift()
 
 /*⚠️ No modificar nada debajo de esta línea ⚠️*/
 module.exports = {
-   Queue,
-   nFactorial,
-   nFibonacci,
+  Queue,
+  nFactorial,
+  nFibonacci,
 };

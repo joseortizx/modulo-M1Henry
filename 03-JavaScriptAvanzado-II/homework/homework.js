@@ -17,7 +17,6 @@ function counter() {
   let contador = 0;
   return function funcionHija() {
     contador++;
-    console.log(contador);
     return contador;
   };
 }
@@ -43,8 +42,11 @@ otra vez cálculos que ya se hicieron anteriormente.
 function cacheFunction(cb) {
   let memoria = {};
   return function (arg) {
-    memoria.push(cb);
-    return memoria;
+    if (memoria.hasOwnProperty(arg)) {
+      return memoria[arg];
+    } else {
+      return (memoria[arg] = cb(arg));
+    }
   };
 }
 
@@ -83,10 +85,10 @@ let getNombreAlumno = getNombre.bind(alumno);
 function crearCadena(delimitadorIzquierda, delimitadorDerecha, cadena) {
   return delimitadorIzquierda + cadena + delimitadorDerecha;
 }
-
-let textoAsteriscos = crearCadena.bind(this,);
-let textoGuiones = crearCadena.bind(this,);
-let textoUnderscore = crearCadena.bind(this,);
+// NO UTILIZA EL THIS LA FUCION DE ARRIBA POR LO TANTO DEBO PASARLE NULL PARA QUE "NO HAGA NNADA" Y DESPUES DE ESO BINDEO LOS OTROS VALORES A LOS PARANETROS DE crearCadena()
+let textoAsteriscos = crearCadena.bind(null, "*", "*");
+let textoGuiones = crearCadena.bind(null, "-", "-");
+let textoUnderscore = crearCadena.bind(null, "_", "_");
 
 // No modifiquen nada debajo de esta linea
 // --------------------------------

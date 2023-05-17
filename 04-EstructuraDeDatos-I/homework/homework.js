@@ -30,7 +30,7 @@ function nFactorial(n) {
 
 // n es el numero de secuencias a repetir
 // 0 y 1 es =  n-1  n+1     0+1=1     1+1=2    1+2=3    2+3=5   c+b=c
-// 1, 1 es = 
+// 1, 1 es =
 //Esto es lo que debo lograr Secuencia:  0, 1, 1, 2, 3, 5, 8, 13, 21, 34
 // Ejemplo: nFibonacci(7) retornará 13, ya que 13
 function nFibonacci(n) {
@@ -55,15 +55,22 @@ Implementar la clase Queue, sabiendo que es una estructura de tipo FIFO, donde e
 Pueden utilizar class o función constructora.
 */
 
-
 // tengo que hacer que esta function sea una kiwi
 function Queue() {
-  let arr = [];
+  this.arr = [];
 }
-// metodos para kiwi, tengo que entender que es una estructura fifo (el primero en entrar es el primero en salir)
-// representado .enkiwi(person4)  => [persona3,persona2,persona1] = [persona4,persona3,persona2,persona1]
-// representado .deskiwi() => [persona4,persona3,persona2]        out[persona1]
-Queue.prototype.unshift()
+
+Queue.prototype.enqueue = function (ele) {
+  return this.arr.unshift(ele);
+};
+Queue.prototype.dequeue = function () {
+  if (this.arr === []) {
+    return undefined;
+  } else return this.arr.pop();
+};
+Queue.prototype.size = function () {
+  return this.arr.length;
+};
 
 /*⚠️ No modificar nada debajo de esta línea ⚠️*/
 module.exports = {

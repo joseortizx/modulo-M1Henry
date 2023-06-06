@@ -2,8 +2,8 @@
 
 /* EJERCICIO 1
 Implementar la clase LinkedList, definiendo los siguientes métodos:
-  - add: // TODO: agrega un nuevo nodo al final de la lista;
-  - remove: elimina el último nodo de la lista y retorna su valor ( // TODO: tener en cuenta el caso particular de una lista de un solo nodo y //TODO: de una lista vacía);
+  - add:  agrega un nuevo nodo al final de la lista;
+  - remove: elimina el último nodo de la lista y retorna su valor ( tener en cuenta el caso particular de una lista de un solo nodo y de una lista vacía);
   - search: recibe un parámetro y lo busca dentro de la lista, con una particularidad: el parámetro puede ser un valor o un callback. En el primer caso, buscamos un nodo cuyo valor coincida con lo buscado; en el segundo, buscamos un nodo cuyo valor, al ser pasado como parámetro del callback, retorne true. 
   EJEMPLO 
   search(3) busca un nodo cuyo valor sea 3;
@@ -24,11 +24,44 @@ LinkedList.prototype.add = function (value) {
   const newNode = new Node(value);
   if (this.head === null) {
     this.head = newNode;
+    return value;
   } else {
-    while(this.next !== null){ 
-      this.next = newNode
+    let curr = this.head;
+    while (curr.next !== null) {
+      curr = curr.next;
     }
-    asignar al .next la creacion del nodo
+    curr.next = newNode;
+  }
+  this.size++;
+};
+
+LinkedList.prototype.remove = function () {
+  let curr = this.head;
+  if (this.head === null) {
+    return null;
+  }
+  if (!curr.next) {
+    let guardarUno = curr.value;
+    this.head = null;
+    return guardarUno;
+  }
+  while (curr.next.next) {
+    curr = curr.next;
+  }
+  let guardarDos = curr.next.value;
+  curr.next = null;
+  this.size--;
+  return guardarDos;
+};
+
+LinkedList.prototype.search = function (parametro) {
+  let curr = this.head;
+  while (!curr.next) {
+    curr = curr.next;
+    if (curr.value === valor) {
+      return valor;
+    }
+    if (curr.value === parametro())
   }
 };
 
